@@ -1,6 +1,6 @@
 {
    "name": "async-named-mutex",
-   "version": "1.0.0",
+   "version": "1.0.1",
    "description": "Named mutex locks for async functions.",
    "type": "module",
    "types": "mutex.d.ts",

@@ -1,0 +1,34 @@
+{
+   "name": "async-named-mutex",
+   "version": "1.0.0",
+   "description": "Named mutex locks for async functions.",
+   "type": "module",
+   "types": "mutex.d.ts",
+   "main": "mutex.js",
+   "keywords": [
+      "async",
+      "mutex",
+      "lock",
+      "named",
+      "concurrency",
+      "critical",
+      "section"
+   ],
+   "license": "MIT",
+   "homepage": "github:chdh/async-named-mutex",
+   "repository": "github:chdh/async-named-mutex",
+   "contributors": [
+      {
+         "name": "Christian d'Heureuse",
+         "email": "chdh@inventec.ch",
+         "url": "http://www.source-code.biz"
+      }
+   ],
+   "scripts": {
+      "clean": "node build.js clean",
+      "build": "node build.js build",
+      "prepack": "node build.js verifyCurrentDirIsDist",
+      "doPack": "cd dist && npm pack",
+      "doPublish": "cd dist && npm publish"
+   }
+}

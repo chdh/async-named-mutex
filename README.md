@@ -1,4 +1,4 @@
-# async-name-mutex
+# async-named-mutex
 
 Named [mutex](https://en.wikipedia.org/wiki/Lock_(computer_science)) locks for async functions.
 
@@ -6,7 +6,7 @@ Named [mutex](https://en.wikipedia.org/wiki/Lock_(computer_science)) locks for a
 
 <b>TypeScript:</b>
 ```typescript
-import {MutexRealm} from "async-name-mutex";
+import {MutexRealm} from "async-named-mutex";
 
 const mutexRealm = new MutexRealm<string>();
 
@@ -24,7 +24,7 @@ async function processResource (resourceId: string) {
 
 <b>JavaScript:</b>
 ```javascript
-import {MutexRealm} from "async-name-mutex";
+import {MutexRealm} from "async-named-mutex";
 
 const mutexRealm = new MutexRealm();
 
@@ -43,4 +43,4 @@ async function processResource (resourceId) {
 Any value which is a valid [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) index
 (`string`, `number`, `object`, ...) can be used as a name (aka key) for a mutex.
 
-NPM package: [async-name-mutex](https://www.npmjs.com/package/async-name-mutex)
+NPM package: [async-named-mutex](https://www.npmjs.com/package/async-named-mutex)

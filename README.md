@@ -2,6 +2,9 @@
 
 Named [mutex](https://en.wikipedia.org/wiki/Lock_(computer_science)) locks for async functions.
 
+In asynchronous JavaScript program code, multiple async functions can operate on the same data.
+Named mutexes can be used to protect access to shared resources.
+
 ## Usage
 
 <b>TypeScript:</b>

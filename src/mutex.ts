@@ -12,15 +12,15 @@ export interface Mutex {
 export class MutexRealm<K> {
 
    private map:              Map<K,MutexImpl<K>[]>;
-      // When a map entry exists for a key, the mutex is acquired.
-      // The map entry is the wait list for the mutex.
+      // When a map entry exists for a key, the mutex key is acquired.
+      // The map entry is the wait list for the mutex key.
 
    public constructor() {
       this.map = new Map();
    }
 
    // Returns a mutex reference object for the specified key.
-   // `key` is the "name" of the semaphore, but it can be any value that can be used as a map index.
+   // `key` is the "name" of the mutex, but it can be any value that can be used as a map index.
    public createMutex (key: K) : Mutex {
       return new MutexImpl<K>(key, this.map);
    }
@@ -49,14 +49,14 @@ class MutexImpl<K> implements Mutex {
    public async acquire() : Promise<void> {
       assert(this.state == MutexState.released);
       const waitList = this.map.get(this.key);
-      if (waitList) {
+      if (waitList) {                                      // another mutex object with this key is already acquired
          this.state = MutexState.waiting;
-         waitList.push(this);
+         waitList.push(this);                              // add this mutex object to the wait list
          return new Promise((resolve: Function, reject: Function) => {
             this.promiseResolve = resolve;
             this.promiseReject = reject;
          });
-      } else {
+      } else {                                             // the mutex can be acquired immediatelly
          this.state = MutexState.acquired;
          this.map.set(this.key, []);
       }
@@ -84,9 +84,9 @@ class MutexImpl<K> implements Mutex {
       this.state = MutexState.released;
       const waitList = this.map.get(this.key);
       assert(!!waitList);
-      if (waitList.length == 0) {
+      if (waitList.length == 0) {                          // no other mutex object is waiting
          this.map.delete(this.key);
-      } else {
+      } else {                                             // pass the lock to the next waiting mutex
          const nextMutex = waitList.shift()!;
          assert(nextMutex.state == MutexState.waiting);
          nextMutex.state = MutexState.acquired;
